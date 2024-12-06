@@ -3,7 +3,6 @@ package com.quynh.sam.models.entity_models;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
 
