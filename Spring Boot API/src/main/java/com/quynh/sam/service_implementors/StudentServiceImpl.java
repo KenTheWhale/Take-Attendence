@@ -1,7 +1,6 @@
 package com.quynh.sam.service_implementors;
 
 
-import com.quynh.sam.models.entity_models.Attendance;
 import com.quynh.sam.models.entity_models.Student;
 import com.quynh.sam.models.request_models.SearchStudentRequest;
 import com.quynh.sam.models.response_models.SearchStudentResponse;
@@ -11,7 +10,7 @@ import com.quynh.sam.services.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -41,7 +40,7 @@ public class StudentServiceImpl implements StudentService {
 
     private String getStatusFromStudent(Student student) {
         return student.getAttendances().stream()
-                .filter(a -> a.getDate().equals(LocalDateTime.now()))
+                .filter(a -> a.getDate().equals(LocalDate.now()))
                 .map(
                         a -> a.getStatus()
                 )

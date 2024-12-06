@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
@@ -23,7 +23,7 @@ public class Attendance {
     @JoinColumn(name = "`student_id`")
     Student student;
 
-    LocalDateTime date;
+    LocalDate date;
 
     String status;
 
