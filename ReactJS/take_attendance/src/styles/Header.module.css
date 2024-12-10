@@ -1,7 +1,17 @@
 .body{
-
+    text-align: center;
+    position: sticky;
+    top: 100px;
+    left: auto;
+    right: auto;
 }
 
-.body h1{
-    color: white;
+.title{
+    background: linear-gradient(90deg, #006A6E 10%, #E0CD67 30%, #EA8FB6 50%, #D3D3D3 75%, #F5CA7B 100%);
+    background-clip: text;
+    color: transparent;
+}
+
+.time{
+
 }
