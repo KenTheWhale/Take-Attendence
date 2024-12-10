@@ -8,8 +8,8 @@ function Menu() {
             <div className="row">
                 <div className="col-md-12">
                     <div className="text-center">
-                        <Link to="/TakeAttendancePage" className={`btn btn-outline-warning mx-2 ${style.buttonCustom}`}>Take Attendance</Link>
-                        <Link to="/AbsentReasonPage" className={`btn btn-outline-warning mx-2 ${style.buttonCustom}`}>Absent Reason</Link>
+                        <Link to="/TakeAttendancePage" className={`btn ${style.buttonCustom}`}>Take Attendance</Link>
+                        <Link to="/AbsentReasonPage" className={`btn ${style.buttonCustom}`}>Absent Reason</Link>
                     </div>
                 </div>
             </div>
