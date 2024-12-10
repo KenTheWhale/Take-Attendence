@@ -1,0 +1,25 @@
+:root {
+    --button-background-color: rgba(175, 238, 238, 0.6);
+    --button-background-color-hover: rgba(175, 238, 238, 1);
+    --button-box-shadow: rgba(175, 238, 238, 0.62);
+    --text-color: rgba(242, 240, 235, 1);
+    /*--text-color-hover: rgba(103, 103, 101, 1);*/
+}
+
+.customButton {
+    position: relative;
+    border: solid 1px var(--button-background-color);
+    background-color: var(--button-background-color);
+    box-shadow: var(--button-box-shadow) 0 0 0;
+    color: var(--text-color);
+    transition: box-shadow .3s linear;
+
+    /*background-color .4s linear*/
+    /*color .4s linear*/
+}
+
+.customButton:hover {
+    /*background: var(--button-background-color-hover);*/
+    box-shadow: var(--button-box-shadow) 0 0 15px;
+    /*color: var(--text-color-hover);*/
+}
