@@ -19,7 +19,7 @@ function App() {
         <BrowserRouter>
             <Header/>
             {/*<Button {...buttonStyle}/>*/}
-            {/*<Footer/>*/}
+            <Footer/>
         </BrowserRouter>
     </>
   )

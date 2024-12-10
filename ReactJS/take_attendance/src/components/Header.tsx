@@ -3,10 +3,10 @@ import TimeCounter from "../ui/TimeCounter.tsx";
 
 function Header(){
     return(
-        <>
-            <h1 className={style.text}>Take Attendance Management</h1>
+        <div className={style.body}>
+            <h1>Take Attendance Management</h1>
             <TimeCounter />
-        </>
+        </div>
     )
 }
 
