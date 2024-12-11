@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import { useState, useEffect } from "react";
 import style from "../styles/Attendance.module.css";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 
 interface StudentProps {
     id: number;
@@ -118,6 +118,7 @@ function TakeAttendancePage() {
 
             return (
                 <tr key={student.id}>
+                    <td>{student.id}</td>
                     <td>{student.id}</td>
                     <td>{student.name}</td>
                     <td>
