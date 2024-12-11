@@ -1,23 +1,40 @@
 import './styles/App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import {RouterProvider, createBrowserRouter} from 'react-router-dom';
 import Header from './components/Header.tsx';
 import Menu from './pages/MenuPage.tsx';
 import Footer from './components/Footer.tsx';
 import TakeAttendancePage from './pages/TakeAttendancePage';
+import AbsentReasonPage from "./pages/AbsentReasonPage.tsx";
+import ErrorPage from "./pages/ErrorPage.tsx";
+
+const router = createBrowserRouter([
+    {
+        path: "/",
+        element: <Menu/>,
+        errorElement: <ErrorPage/>
+    },
+    {
+        path: "/attendance",
+        element: <TakeAttendancePage/>,
+        errorElement: <ErrorPage/>
+    },
+    {
+        path: "/reason",
+        element: <AbsentReasonPage/>,
+        errorElement: <ErrorPage/>
+    }
+]);
 
 function App() {
     return (
-        <BrowserRouter>
-            <Header />
+        <div className="parent-block">
+            <div className="header-block"><Header/></div>
             <main>
-                <Routes>
-                    <Route path="/" element={<Menu />} />
-                    <Route path="/TakeAttendancePage" element={<TakeAttendancePage />} />
-                </Routes>
+                <RouterProvider router={router}></RouterProvider>
             </main>
-            <Footer />
-        </BrowserRouter>
-    );
+            <div className="footer-block"><Footer/></div>
+        </div>
+    )
 }
 
 export default App;

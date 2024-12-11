@@ -12,13 +12,15 @@ function TimeCounter() {
         return () => clearInterval(interval);
     }, []);
 
+
+
+    const date = new Date();
+
     return (
         <>
             <p className={style.title} style={{
                 fontWeight:"bold",
-            }}>Time: <span className={style.body}>
-                    {time.toLocaleTimeString()}
-                </span>
+            }}>Date: {date.getDate()}/{date.getMonth()}/{date.getFullYear()}, Time: {time.toLocaleTimeString()}
             </p>
         </>
     );

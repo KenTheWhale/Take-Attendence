@@ -1,17 +1,10 @@
-.body{
-    text-align: center;
-    position: sticky;
-    top: 100px;
-    left: auto;
-    right: auto;
-}
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Inter:wght@100..900&family=Overpass:ital,wght@0,100..900;1,100..900&display=swap');
 
-.title{
+
+.title {
+    font-family: "Bungee Spice", sans-serif;
     background: linear-gradient(90deg, #006A6E 10%, #E0CD67 30%, #EA8FB6 50%, #D3D3D3 75%, #F5CA7B 100%);
     background-clip: text;
     color: transparent;
-}
-
-.time{
-
+    font-size: 48px;
 }

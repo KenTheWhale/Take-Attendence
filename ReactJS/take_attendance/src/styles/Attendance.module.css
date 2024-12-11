@@ -1,9 +1,9 @@
 .tableCustom {
-    background-color: rgba(0, 0, 0, 0.6); /* Nền bảng tối hơn để nổi bật trên nền sáng */
+    background-color: rgba(0, 0, 0, 0.8); /* Nền bảng tối hơn để nổi bật trên nền sáng */
     color: #f8f9fa; /* Màu chữ sáng để dễ đọc trên nền tối */
     border-radius: 12px; /* Bo góc cho bảng */
-    margin-top: 20px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Thêm bóng cho bảng để tạo chiều sâu */
+    padding: 2% 1%;
+    box-shadow: 0 4px 50px rgba(0, 0, 0, 0.4); /* Thêm bóng cho bảng để tạo chiều sâu */
 }
 
 .tableCustom th,

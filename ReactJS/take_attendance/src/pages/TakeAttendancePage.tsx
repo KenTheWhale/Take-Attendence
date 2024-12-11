@@ -48,7 +48,6 @@ function TakeAttendancePage() {
 
     return (
         <div className={`container ${style.tableCustom}`}>
-            <h1 className="text-center my-4">Take Attendance</h1>
             <table className={`table table-striped ${style.tableCustom}`}>
                 <thead>
                 <tr>
