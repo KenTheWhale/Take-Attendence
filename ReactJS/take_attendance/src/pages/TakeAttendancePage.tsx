@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.css';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import style from "../styles/Attendance.module.css";
 import { Link } from "react-router-dom";
 
@@ -10,35 +10,125 @@ interface StudentProps {
 }
 
 function TakeAttendancePage() {
-    const [students, setStudents] = useState<StudentProps[]>([
-        {
-            id: 1,
-            name: "John",
-            status: "Absent"
-        },
-        {
-            id: 2,
-            name: "Isac",
-            status: "Absent"
+    // const [students, setStudents] = useState<StudentProps[]>([
+    //     {
+    //         id: 1,
+    //         name: "John",
+    //         status: "Absent without reason"
+    //     },
+    //     {
+    //         id: 2,
+    //         name: "Isac",
+    //         status: "Absent without reason"
+    //     }
+    // ]);
+    const [students, setStudents] = useState<StudentProps[]>([]);
+    useEffect(() => {
+        const storedData = sessionStorage.getItem("attendanceList");
+        if (storedData !== null) {
+            setStudents(JSON.parse(storedData));
+        } else {
+            setStudents([
+                {
+                    id: 1,
+                    name: "John",
+                    status: "Absent without reason"
+                },
+                {
+                    id: 2,
+                    name: "Isac",
+                    status: "Absent without reason" },
+                {
+                    id: 3,
+                    name: "John",
+                    status: "Absent without reason"
+                },
+                {
+                    id: 4,
+                    name: "Isac",
+                    status: "Absent without reason"
+                },
+                {
+                    id: 5,
+                    name: "John",
+                    status: "Absent without reason"
+                },
+                {
+                    id: 6,
+                    name: "Isac",
+                    status: "Absent without reason"
+                },
+                {
+                    id: 7,
+                    name: "John",
+                    status: "Absent without reason"
+                },
+                {
+                    id: 8,
+                    name: "Isac",
+                    status: "Absent without reason"
+                },
+                {
+                    id: 9,
+                    name: "John",
+                    status: "Absent without reason"
+                },
+                {
+                    id: 10,
+                    name: "Isac",
+                    status: "Absent without reason"
+                }
+            ]);
         }
-    ]);
+    }, []);
+
+
+    function setStatus(id: number) {
+        const updatedStudents = students.map(student => {
+            if (student.id === id) {
+                if (student.status === "Present") {
+                    return { ...student, status: "Absent without reason" };
+                } else {
+                    return { ...student, status: "Present" };
+                }
+            }
+            return student;
+        });
+        setStudents(updatedStudents);
+    }
+
+    function setAttendance() {
+        sessionStorage.setItem("attendanceList", JSON.stringify(students));
+        alert("Attendance data has been saved to session storage!");
+    }
+
 
     function renderStudents() {
         return students.map(student => {
+            let buttonClass = "";
+            let buttonLabel = "";
+
+            if (student.status === "Present") {
+                buttonClass = "btn-danger";
+                buttonLabel = "Absent";
+            } else {
+                buttonClass = "btn-success";
+                buttonLabel = "Present";
+            }
+
             return (
                 <tr key={student.id}>
                     <td>{student.id}</td>
-                    <td>{student.id}</td>
                     <td>{student.name}</td>
                     <td>
-                        <span>{student.status === "Absent" ? "Absent without reason" : student.status}</span>
+                        <span>{student.status}</span>
                     </td>
                     <td>
                         <button
-                            className="btn btn-success"
-                            onClick={() => alert(`Attendance for ${student.name} is set to Present`)}
+                            className={`btn ${buttonClass}`}
+                            onClick={() => setStatus(student.id)}
                         >
-                            Present
+                            {buttonLabel}
                         </button>
                     </td>
                 </tr>
@@ -46,14 +136,14 @@ function TakeAttendancePage() {
         });
     }
 
+
     return (
         <div className={`container ${style.tableCustom}`}>
             <table className={`table table-striped ${style.tableCustom}`}>
                 <thead>
                 <tr>
-                    <th>STT</th>
-                    <th>Student ID</th>
-                    <th>Student Name</th>
+                    <th>ID</th>
+                    <th>Name</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
@@ -62,8 +152,17 @@ function TakeAttendancePage() {
                 {renderStudents()}
                 </tbody>
             </table>
-            <div className="text-center">
-                <Link to="/" className="btn btn-primary">Back</Link>
+            <div className="container">
+                <div className="row">
+                    <div className="text-center col-md-12">
+                        <Link to="/" className={`btn btn-primary ${style.btnBackFinish}`}>Back</Link>
+                        <button
+                            onClick={setAttendance}
+                            className={`btn btn-primary ${style.btnBackFinish}`}
+                        >Finish</button>
+                    </div>
+
+                </div>
             </div>
         </div>
     );

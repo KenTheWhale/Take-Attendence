@@ -1,19 +1,24 @@
 .tableCustom {
-    background-color: rgba(0, 0, 0, 0.8); /* Nền bảng tối hơn để nổi bật trên nền sáng */
+    margin-top: 3%;
+    height: 50%;
     color: #f8f9fa; /* Màu chữ sáng để dễ đọc trên nền tối */
     border-radius: 12px; /* Bo góc cho bảng */
-    padding: 2% 1%;
+    /*padding: 2% 1%;*/
     box-shadow: 0 4px 50px rgba(0, 0, 0, 0.4); /* Thêm bóng cho bảng để tạo chiều sâu */
+    backdrop-filter: blur(20px);
+    overflow-x: auto; /* Hide horizontal scrollbar */
 }
 
 .tableCustom th,
 .tableCustom td {
-    padding: 15px 20px; /* Tăng khoảng cách giữa các ô để bảng trông thoáng hơn */
+    padding: 1% 2%; /* Tăng khoảng cách giữa các ô để bảng trông thoáng hơn */
     text-align: center;
 }
 
 .tableCustom th {
-    background-color: rgba(52, 58, 64, 0.8); /* Nền tiêu đề bảng tối hơn để dễ phân biệt */
+    position: sticky;
+    top: 0;
+    background-color: rgba(52, 58, 64); /* Nền tiêu đề bảng tối hơn để dễ phân biệt */
     color: #f8f9fa; /* Chữ sáng cho tiêu đề */
     font-weight: bold;
 }
@@ -37,10 +42,11 @@
     border-color: #1e7e34;
 }
 
-.btn-primary {
+.btnBackFinish {
     background-color: #007bff; /* Màu xanh dương cho nút Back */
     border-color: #007bff;
     color: white;
+    margin-left: 1%;
 }
 
 .btn-primary:hover {

@@ -4,6 +4,8 @@ body{
     background-position: center;
     background-size: cover;
     background-attachment: fixed;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 body::after {
@@ -15,6 +17,7 @@ body::after {
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.4);
     z-index: 1;
+
 }
 
 body,html{
