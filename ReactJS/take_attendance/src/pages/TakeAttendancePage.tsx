@@ -201,7 +201,7 @@ function TakeAttendancePage() {
 
             <div className={`container ${style.tableCustom}`}>
                 <SearchBar dataName={name} dataCode={code} searchFunction={search}/>
-                <table className={`table table-striped ${style.tableCustom}`}>
+                <table className={`table table-striped table-hover table-bordered ${style.tableCustom}`}>
                     <thead>
                     <tr>
                         <th>ID</th>
