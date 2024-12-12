@@ -10,77 +10,60 @@ interface StudentProps {
 }
 
 function TakeAttendancePage() {
-    // const [students, setStudents] = useState<StudentProps[]>([
-    //     {
-    //         id: 1,
-    //         name: "John",
-    //         status: "Absent without reason"
-    //     },
-    //     {
-    //         id: 2,
-    //         name: "Isac",
-    //         status: "Absent without reason"
-    //     }
-    // ]);
-    const [students, setStudents] = useState<StudentProps[]>([]);
-    useEffect(() => {
-        const storedData = sessionStorage.getItem("attendanceList");
-        if (storedData !== null) {
-            setStudents(JSON.parse(storedData));
-        } else {
-            setStudents([
-                {
-                    id: 1,
-                    name: "John",
-                    status: "Absent without reason"
-                },
-                {
-                    id: 2,
-                    name: "Isac",
-                    status: "Absent without reason" },
-                {
-                    id: 3,
-                    name: "John",
-                    status: "Absent without reason"
-                },
-                {
-                    id: 4,
-                    name: "Isac",
-                    status: "Absent without reason"
-                },
-                {
-                    id: 5,
-                    name: "John",
-                    status: "Absent without reason"
-                },
-                {
-                    id: 6,
-                    name: "Isac",
-                    status: "Absent without reason"
-                },
-                {
-                    id: 7,
-                    name: "John",
-                    status: "Absent without reason"
-                },
-                {
-                    id: 8,
-                    name: "Isac",
-                    status: "Absent without reason"
-                },
-                {
-                    id: 9,
-                    name: "John",
-                    status: "Absent without reason"
-                },
-                {
-                    id: 10,
-                    name: "Isac",
-                    status: "Absent without reason"
-                }
-            ]);
+    const [students, setStudents] = useState<StudentProps[]>([
+        {
+            id: 1,
+            name: "John",
+            status: "Absent without reason"
+        },
+        {
+            id: 2,
+            name: "Isac",
+            status: "Absent without reason" },
+        {
+            id: 3,
+            name: "John",
+            status: "Absent without reason"
+        },
+        {
+            id: 4,
+            name: "Isac",
+            status: "Absent without reason"
+        },
+        {
+            id: 5,
+            name: "John",
+            status: "Absent without reason"
+        },
+        {
+            id: 6,
+            name: "Isac",
+            status: "Absent without reason"
+        },
+        {
+            id: 7,
+            name: "John",
+            status: "Absent without reason"
+        },
+        {
+            id: 8,
+            name: "Isac",
+            status: "Absent without reason"
+        },
+        {
+            id: 9,
+            name: "John",
+            status: "Absent without reason"
+        },
+        {
+            id: 10,
+            name: "Isac",
+            status: "Absent without reason"
         }
-    }, []);
+    ]);
+    useEffect(() => {
+        sessionStorage.setItem("attendanceList", JSON.stringify(students));
+    }, [students]);
 
 
     function setStatus(id: number) {
@@ -98,7 +81,7 @@ function TakeAttendancePage() {
     }
 
     function setAttendance() {
-        sessionStorage.setItem("attendanceList", JSON.stringify(students));
+        // sessionStorage.setItem("attendanceList", JSON.stringify(students));
         alert("Attendance data has been saved to session storage!");
     }
 
