@@ -40,12 +40,6 @@ public class AttendanceServiceImpl implements AttendanceService {
                     .build();
         }
 
-        if (studentAttendanceList.isEmpty()) {
-            return UpdateAttendanceStatusResponse.builder()
-                    .status("400")
-                    .message("No attendance records found for today.")
-                    .build();
-        }
         // Use constants from the Status class
         List<String> validStatuses = Arrays.asList(
                 Status.PRESENT,
@@ -70,17 +64,10 @@ public class AttendanceServiceImpl implements AttendanceService {
          String status = getStudentStatus(request, attendance.getStudent().getId());
 
          // Check if student status is valid
-         if (status == null) {
+         if (status == null && !validStatuses.contains(status)) {
              return UpdateAttendanceStatusResponse.builder()
                      .status("400")
                      .message("No status found for student ID " + attendance.getStudent().getId())
-                     .build();
-         }
-
-         if (!validStatuses.contains(status)) {
-             return UpdateAttendanceStatusResponse.builder()
-                     .status("400")
-                     .message("Invalid status for student ID " + attendance.getStudent().getId())
                      .build();
          }
 
