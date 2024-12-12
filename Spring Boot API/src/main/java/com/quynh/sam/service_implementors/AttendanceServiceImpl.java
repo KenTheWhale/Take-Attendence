@@ -137,8 +137,8 @@ public class AttendanceServiceImpl implements AttendanceService {
     }
 
     private String checkStatus(String status) {
-        boolean isPresent = status.equalsIgnoreCase(Status.ABSENT);
-        boolean isAbsent = status.equalsIgnoreCase(Status.PRESENT);
+        boolean isPresent = status.equalsIgnoreCase(Status.PRESENT);
+        boolean isAbsent = status.equalsIgnoreCase(Status.ABSENT);
         boolean isAbsentWithoutReason = status.equalsIgnoreCase(Status.ABSENT_WITHOUT_REASON);
 
         if(!isPresent && !isAbsent && !isAbsentWithoutReason){
