@@ -3,6 +3,7 @@ package com.quynh.sam.service_implementors;
 
 import com.quynh.sam.enums.Status;
 import com.quynh.sam.models.entity_models.Attendance;
+import com.quynh.sam.models.entity_models.Student;
 import com.quynh.sam.models.request_models.EditReasonRequest;
 import com.quynh.sam.models.request_models.UpdateAttendanceStatusRequest;
 import com.quynh.sam.models.response_models.EditReasonResponse;
@@ -10,6 +11,7 @@ import com.quynh.sam.models.response_models.UpdateAttendanceStatusResponse;
 import com.quynh.sam.models.response_models.ViewAllEditReasonResponse;
 import com.quynh.sam.repositories.AttendanceRepo;
 import com.quynh.sam.services.AttendanceService;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -72,16 +74,28 @@ public class AttendanceServiceImpl implements AttendanceService {
                 .message("")
                 .students(
                         attendanceRepo.findAll().stream()
+                                .filter(attendance -> attendance.getDate().equals(LocalDate.now()))
                                 .map(
                                         attendance -> ViewAllEditReasonResponse.Student.builder()
                                                 .id(attendance.getId())
                                                 .code(attendance.getStudent().getCode())
                                                 .name(attendance.getStudent().getName())
                                                 .reason(attendance.getReason())
+                                                .status(getStatusFromStudent(attendance.getStudent()))
                                                 .build()
                                 )
                                 .toList()
                 )
                 .build();
+    }
+
+    private String getStatusFromStudent(Student student) {
+        return student.getAttendances().stream()
+                .filter(a -> a.getDate().equals(LocalDate.now()))
+                .map(
+                        a -> a.getStatus()
+                )
+                .findAny()
+                .orElse(null);
     }
 }
