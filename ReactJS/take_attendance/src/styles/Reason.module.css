@@ -6,7 +6,7 @@
     width: 100%;
     padding: 1% 1%;
     margin-top: 2%;
-    height: 50%;
+    height: 350px;
 }
 
 .button_block{
@@ -41,9 +41,34 @@
     position: sticky;
     top: 0;
     box-shadow: 0 -5px 1px black;
+    background-color: black;
 }
 
 .table_block thead th{
     background-color: black;
     color: white;
+}
+
+.table_block thead tr th:nth-child(1){
+    width: 5%;
+}
+
+.table_block thead tr th:nth-child(2){
+    width: 10%;
+}
+
+.table_block thead tr th:nth-child(3){
+    width: 30%;
+}
+
+.table_block thead tr th:nth-child(4){
+    width: 20%;
+}
+
+.table_block thead tr th:nth-child(5){
+    width: 35%;
+}
+
+.table_block tbody tr td input{
+    width: 80%;
 }

@@ -1,0 +1,14 @@
+.search_container{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 2%;
+}
+
+.search_container input{
+    width: 92%;
+}
+
+.search_container select{
+    width: 150px
+}
