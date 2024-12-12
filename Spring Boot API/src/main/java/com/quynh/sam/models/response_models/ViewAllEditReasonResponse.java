@@ -25,7 +25,7 @@ public class ViewAllEditReasonResponse {
         int id;
         String code;
         String name;
-        String status;
         String reason;
+        String status;
     }
 }
