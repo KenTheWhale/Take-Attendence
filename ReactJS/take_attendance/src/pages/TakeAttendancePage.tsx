@@ -119,7 +119,6 @@ function TakeAttendancePage() {
             return (
                 <tr key={student.id}>
                     <td>{student.id}</td>
-                    <td>{student.id}</td>
                     <td>{student.name}</td>
                     <td>
                         <span>{student.status}</span>

@@ -20,7 +20,7 @@ function TimeCounter() {
         <>
             <p className={style.title} style={{
                 fontWeight:"bold",
-            }}>Date: {date.getDate()}/{date.getMonth()}/{date.getFullYear()}, Time: {time.toLocaleTimeString()}
+            }}>Date: {date.getDate()}/{date.getMonth() + 1}/{date.getFullYear()}, Time: {time.toLocaleTimeString()}
             </p>
         </>
     );

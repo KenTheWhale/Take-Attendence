@@ -7,6 +7,7 @@ import TakeAttendancePage from './pages/TakeAttendancePage';
 import AbsentReasonPage from "./pages/AbsentReasonPage.tsx";
 import ErrorPage from "./pages/ErrorPage.tsx";
 
+
 const router = createBrowserRouter([
     {
         path: "/",//account/list
