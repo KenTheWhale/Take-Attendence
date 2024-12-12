@@ -97,11 +97,20 @@ public class AttendanceServiceImpl implements AttendanceService {
 
     @Override
     public EditReasonResponse editReason(EditReasonRequest request) {
-        Attendance attendance = attendanceRepo.findByDateAndStudent_Code(LocalDate.now(), request.getStudentCode());
-        assert attendance != null;
-        attendance.setStatus(Status.ABSENT);
-        attendance.setReason(request.getReason());
-        attendanceRepo.save(attendance);
+
+        for(EditReasonRequest.Student student : request.getStudentList()) {
+            Attendance attendance = attendanceRepo.findByDateAndStudent_Code(LocalDate.now(), student.getStudentCode());
+            assert attendance != null;
+            if(!student.getReason().isEmpty()){
+                attendance.setStatus(Status.ABSENT);
+
+            } else {
+                attendance.setStatus(Status.ABSENT_WITHOUT_REASON);
+            }
+            attendance.setReason(student.getReason());
+            attendanceRepo.save(attendance);
+        }
+
 
         return EditReasonResponse.builder()
                 .status("200")
