@@ -15,13 +15,7 @@ interface Student {
 interface StudentData {
     status: string,
     message: string,
-    students: [{
-        id: number,
-        code: string,
-        name: string,
-        reason: string,
-        status: string,
-    }]
+    students: Student[]
 }
 
 function AbsentReasonPage() {
@@ -42,9 +36,8 @@ function AbsentReasonPage() {
         setPopupOpen(false)
     }
 
-    const handleBack = () => {
+    const handleCancel = () => {
         if (isFinish) {
-            setIsFinish(false)
             navigate('/')
         } else {
             openPopup()
@@ -53,7 +46,43 @@ function AbsentReasonPage() {
 
     const handleFinish = () => {
         setIsFinish(true)
+        sendStudent().then(r => console.log(r))
     }
+
+    const sendStudent = async () => {
+        try {
+            const studentList: Student[] = JSON.parse(sessionStorage.getItem("students") || '[]')
+            const studentRequest = {
+                studentList: studentList.map(s => (
+                    {
+                        code: s.code,
+                        reason: s.reason,
+                    }
+                ))
+            };
+
+            const response = await fetch("http://localhost:8080/attendance/edit/reason", {
+                method: "PUT",
+                mode: "cors",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(studentRequest)
+            })
+
+            if (!response.ok) {
+                console.log("Error: " + response.status)
+            }
+
+            const data = await response.json()
+
+            alert(data.message)
+
+        } catch (err) {
+            console.log(err)
+        }
+    };
+
 
     useEffect(() => {
         const fetchStudent = async () => {
@@ -82,7 +111,7 @@ function AbsentReasonPage() {
             }
         };
 
-        fetchStudent();
+        fetchStudent().then(r => console.log(r));
     }, [])
 
     useEffect(() => {
@@ -101,7 +130,7 @@ function AbsentReasonPage() {
             )
 
             setStudents(searchedStudents)
-        }else {
+        } else {
             setStudents(originStudents)
         }
 
@@ -142,7 +171,7 @@ function AbsentReasonPage() {
                                     <td>
                                         <input
                                             onChange={(event) => handleChange(event, student.id)}
-                                            placeholder={student.reason.length === 0 ? 'No reason' : student.reason}/>
+                                            placeholder={student.reason.length === 0 ? 'No reason' : ''} value={student.reason}/>
                                     </td>
                                 </tr>
                             )
@@ -152,7 +181,7 @@ function AbsentReasonPage() {
                 </table>
             </div>
             <div className={`${style.button_block}`}>
-                <button className={`btn btn-danger`} onClick={handleBack}>Back</button>
+                <button className={`btn btn-danger`} onClick={handleCancel}>Cancel</button>
                 <button className={`btn btn-success`} onClick={handleFinish}>Finish</button>
             </div>
             <div>
