@@ -11,6 +11,7 @@ import com.quynh.sam.models.response_models.UpdateAttendanceStatusResponse;
 import com.quynh.sam.models.response_models.ViewAllEditReasonResponse;
 import com.quynh.sam.repositories.AttendanceRepo;
 import com.quynh.sam.services.AttendanceService;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -73,6 +74,7 @@ public class AttendanceServiceImpl implements AttendanceService {
                 .message("")
                 .students(
                         attendanceRepo.findAll().stream()
+                                .filter(attendance -> attendance.getDate().equals(LocalDate.now()))
                                 .map(
                                         attendance -> ViewAllEditReasonResponse.Student.builder()
                                                 .id(attendance.getId())
