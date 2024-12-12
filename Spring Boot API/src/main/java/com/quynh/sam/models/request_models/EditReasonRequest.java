@@ -3,6 +3,8 @@ package com.quynh.sam.models.request_models;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -10,7 +12,17 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class EditReasonRequest {
 
-    String studentCode;
+    List<Student> studentList;
 
-    String reason;
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class Student {
+        String studentCode;
+
+        String reason;
+    }
+
+
 }
