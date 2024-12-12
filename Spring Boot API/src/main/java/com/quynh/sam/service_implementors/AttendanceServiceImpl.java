@@ -7,6 +7,7 @@ import com.quynh.sam.models.request_models.EditReasonRequest;
 import com.quynh.sam.models.request_models.UpdateAttendanceStatusRequest;
 import com.quynh.sam.models.response_models.EditReasonResponse;
 import com.quynh.sam.models.response_models.UpdateAttendanceStatusResponse;
+import com.quynh.sam.models.response_models.ViewAllEditReasonResponse;
 import com.quynh.sam.repositories.AttendanceRepo;
 import com.quynh.sam.services.AttendanceService;
 import lombok.RequiredArgsConstructor;
@@ -61,6 +62,26 @@ public class AttendanceServiceImpl implements AttendanceService {
         return EditReasonResponse.builder()
                 .status("200")
                 .message("Successfully edited reason")
+                .build();
+    }
+
+    @Override
+    public ViewAllEditReasonResponse viewAllEditReason() {
+        return ViewAllEditReasonResponse.builder()
+                .status("200")
+                .message("")
+                .students(
+                        attendanceRepo.findAll().stream()
+                                .map(
+                                        attendance -> ViewAllEditReasonResponse.Student.builder()
+                                                .id(attendance.getId())
+                                                .code(attendance.getStudent().getCode())
+                                                .name(attendance.getStudent().getName())
+                                                .reason(attendance.getReason())
+                                                .build()
+                                )
+                                .toList()
+                )
                 .build();
     }
 }
