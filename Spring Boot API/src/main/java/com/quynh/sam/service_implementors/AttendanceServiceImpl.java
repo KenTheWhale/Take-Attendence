@@ -108,6 +108,10 @@ public class AttendanceServiceImpl implements AttendanceService {
         for(UpdateAttendanceStatusRequest.Student student : request.getStudentList()) {
             Attendance attendance = getAttendanceByStudentID(student.getId());
             String status = checkStatus(student.getStatus());
+            if(status != null && !status.equals(Status.ABSENT)) {
+                assert attendance != null;
+                attendance.setReason("");
+            }
             if(status == null){
                 return UpdateAttendanceStatusResponse.builder()
                         .status("400")
@@ -151,7 +155,7 @@ public class AttendanceServiceImpl implements AttendanceService {
     public EditReasonResponse editReason(EditReasonRequest request) {
 
         for(EditReasonRequest.Student student : request.getStudentList()) {
-            Attendance attendance = attendanceRepo.findByDateAndStudent_Code(LocalDate.now(), student.getStudentCode());
+            Attendance attendance = attendanceRepo.findByDateAndStudent_Code(LocalDate.now(), student.getCode());
             assert attendance != null;
             if(!student.getReason().isEmpty()){
                 attendance.setStatus(Status.ABSENT);
