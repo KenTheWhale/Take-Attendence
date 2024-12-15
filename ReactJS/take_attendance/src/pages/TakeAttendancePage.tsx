@@ -31,7 +31,6 @@ function TakeAttendancePage() {
     const [originStudents, setOriginStudents] = useState<StudentProps[]>([]);
 
 
-
     useEffect(() => {
 
         const fetchStudent = async () => {
@@ -84,7 +83,7 @@ function TakeAttendancePage() {
                 student.status === "Present"
                     ? "Absent without reason"
                     : "Present";
-            return student.id === id ? { ...student, status: newStatus } : student;
+            return student.id === id ? {...student, status: newStatus} : student;
         });
         setStudents(updatedStudents);
     }
@@ -99,28 +98,28 @@ function TakeAttendancePage() {
             })),
         };
         console.log(studentList);
-            const saveData = async () => {
-                try {
-                    const response = await fetch('http://localhost:8080/attendance/edit/status', {
-                        method: 'PUT',
-                        mode: 'cors',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(attendanceData),
-                    });
+        const saveData = async () => {
+            try {
+                const response = await fetch('http://localhost:8080/attendance/edit/status', {
+                    method: 'PUT',
+                    mode: 'cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(attendanceData),
+                });
 
-                    if (!response.ok) {
-                        console.log('Error' + response.status);
-                        return;
-                    }
-                    const data: StudentData = await response.json();
-                    console.log('Response:', data.message);
-                }catch(error){
-                    console.log('Error' + error);
+                if (!response.ok) {
+                    console.log('Error' + response.status);
+                    return;
                 }
+                const data: StudentData = await response.json();
+                console.log('Response:', data.message);
+            } catch (error) {
+                console.log('Error' + error);
             }
-            saveData().then(r => console.log(r));
+        }
+        saveData().then(r => console.log(r));
         alert("Attendance data has been saved ");
     }
 
@@ -159,16 +158,16 @@ function TakeAttendancePage() {
     }
 
     function search(keyword: string, type: string) {
-        if(keyword.length !== 0) {
+        if (keyword.length !== 0) {
             const searchedStudents = originStudents.filter(student => {
-                if(type === "name") {
+                if (type === "name") {
                     return student.name.toLowerCase().includes(keyword.toLowerCase())
                 } else {
                     return student.code.toLowerCase().includes(keyword.toLowerCase())
                 }
             })
             setStudents(searchedStudents)
-        }else{
+        } else {
             setStudents(originStudents)
         }
     }
@@ -199,36 +198,36 @@ function TakeAttendancePage() {
 
     return (
 
-            <div className={`container ${style.tableCustom}`}>
-                <SearchBar dataName={name} dataCode={code} searchFunction={search}/>
-                <table className={`table table-striped table-hover table-bordered ${style.tableCustom}`}>
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Code</th>
-                        <th>Name</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {renderStudents()}
-                    </tbody>
-                </table>
-                <div className="container">
-                    <div className="row">
-                        <div className="text-center col-md-12">
-                            <Link to="/" className={`btn btn-primary ${style.btnBackFinish}`}>Back</Link>
-                            <button
-                                onClick={setAttendance}
-                                className={`btn btn-primary ${style.btnBackFinish}`}
-                            >Finish
-                            </button>
-                        </div>
-
+        <div className={`container ${style.tableCustom}`}>
+            <SearchBar dataName={name} dataCode={code} searchFunction={search}/>
+            <table className={`table table-striped table-hover table-bordered ${style.tableCustom}`}>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {renderStudents()}
+                </tbody>
+            </table>
+            <div className="container">
+                <div className="row">
+                    <div className="text-center col-md-12">
+                        <Link to="/" className={`btn btn-primary ${style.btnBackFinish}`}>Back</Link>
+                        <button
+                            onClick={setAttendance}
+                            className={`btn btn-primary ${style.btnBackFinish}`}
+                        >Finish
+                        </button>
                     </div>
+
                 </div>
             </div>
+        </div>
     );
 }
 
