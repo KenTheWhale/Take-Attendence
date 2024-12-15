@@ -9,11 +9,14 @@
     overflow-x: auto; /* Hide horizontal scrollbar */
 }
 
-.tableCustom th,
-.tableCustom td {
-    padding: 1% 2%; /* Tăng khoảng cách giữa các ô để bảng trông thoáng hơn */
-    text-align: center;
-}
+/*.tableCustom th{*/
+/*    padding: 10px 10px; !* Tăng khoảng cách giữa các ô để bảng trông thoáng hơn *!*/
+/*    text-align: center;*/
+/*}*/
+/*.tableCustom td {*/
+/*    padding: 10px 10px; !* Tăng khoảng cách giữa các ô để bảng trông thoáng hơn *!*/
+/*    text-align: center;*/
+/*}*/
 
 .tableCustom th {
     position: sticky;
