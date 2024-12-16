@@ -181,10 +181,13 @@ public class AttendanceServiceImpl implements AttendanceService {
 
     private List<SendEmailResponse.Student> getStudentListBaseOnStatus(String status) {
         return attendanceRepo.findAllByDateAndStatus(LocalDate.now(), status).stream()
+                .filter(attendance -> !attendance.getStudent().isOnboard())
                 .map(attendance -> SendEmailResponse.Student.builder()
                         .code(attendance.getStudent().getCode())
                         .name(attendance.getStudent().getName())
                         .build())
                 .toList();
     }
+    //Absent + present có onboard = false
+
 }
