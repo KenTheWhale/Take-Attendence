@@ -1,0 +1,22 @@
+.parent {
+    color: white;
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+}
+
+.parent h2 {
+    font-size: 21px;
+}
+
+.custom_indent {
+    padding-left: 3rem;
+}
+
+.custom_indent1 {
+    padding-left: 5rem;
+}
+
+.custom_indent2 {
+    padding-left: 7rem;
+    color: #d0cfff;
+}
