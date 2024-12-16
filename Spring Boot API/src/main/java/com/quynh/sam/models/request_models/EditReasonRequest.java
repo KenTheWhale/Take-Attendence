@@ -19,7 +19,8 @@ public class EditReasonRequest {
     @AllArgsConstructor
     @Builder
     public static class Student {
-        String code;
+
+        String studentCode;
 
         String reason;
     }

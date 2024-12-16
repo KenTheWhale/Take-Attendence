@@ -11,4 +11,6 @@ public interface AttendanceRepo extends JpaRepository<Attendance, Integer> {
     List<Attendance> findAllByDate(LocalDate date);
 
     Attendance findByDateAndStudent_Code(LocalDate date, String code);
+
+    List<Attendance> findAllByDateAndStatus(LocalDate date, String status);
 }
