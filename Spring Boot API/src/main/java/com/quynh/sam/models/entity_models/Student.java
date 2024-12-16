@@ -23,6 +23,8 @@ public class Student {
 
     String code;
 
+    boolean isOnboard;
+
     @OneToMany(mappedBy = "student", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
