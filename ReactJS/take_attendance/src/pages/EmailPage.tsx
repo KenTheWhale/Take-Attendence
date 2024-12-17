@@ -91,7 +91,7 @@ function EmailPage() {
                     </div>
                 </div>
                 <div className="d-flex justify-content-center pt-5 pb-5">
-                        <Link to="/" className={`btn btn-outline-warning w-25 fa-solid fa-chevron-left}`}><FontAwesomeIcon icon={faChevronLeft}/><span className="m-lg-3">Back</span></Link>
+                        <Link to="/" className={`btn btn-outline-warning fa-solid fa-chevron-left}`}><FontAwesomeIcon icon={faChevronLeft}/><span className="m-lg-3">Back</span></Link>
                 </div>
             </>
         )
