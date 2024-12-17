@@ -6,6 +6,7 @@ import Footer from './components/Footer.tsx';
 import TakeAttendancePage from './pages/TakeAttendancePage';
 import AbsentReasonPage from "./pages/AbsentReasonPage.tsx";
 import ErrorPage from "./pages/ErrorPage.tsx";
+import EmailPage from "./pages/EmailPage.tsx";
 
 
 const router = createBrowserRouter([
@@ -22,6 +23,11 @@ const router = createBrowserRouter([
     {
         path: "/reason",
         element: <AbsentReasonPage/>,
+        errorElement: <ErrorPage/>
+    },
+    {
+        path: "/email",
+        element: <EmailPage/>,
         errorElement: <ErrorPage/>
     }
 ]);

@@ -10,6 +10,7 @@ function Menu() {
                     <div className="text-center">
                         <Link to="/attendance" className={`btn ${style.buttonCustom}`}>Take Attendance</Link>
                         <Link to="/reason" className={`btn ${style.buttonCustom}`}>Absent Reason</Link>
+                        <Link to="/email" className={`btn ${style.buttonCustom}`}>Review Email</Link>
                     </div>
                 </div>
             </div>

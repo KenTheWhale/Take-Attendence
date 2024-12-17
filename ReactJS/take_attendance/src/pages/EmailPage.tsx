@@ -1,5 +1,4 @@
-import style from '../styles/Email.module.css'
-import 'bootstrap/dist/css/bootstrap.min.css';
+import style from '../styles/Email.module.css';
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

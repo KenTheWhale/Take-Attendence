@@ -47,6 +47,7 @@ function AbsentReasonPage() {
     const handleFinish = () => {
         setIsFinish(true)
         sendStudent().then(r => console.log(r))
+        navigate("/")
     }
 
     const sendStudent = async () => {
@@ -85,33 +86,32 @@ function AbsentReasonPage() {
 
 
     useEffect(() => {
-        const fetchStudent = async () => {
-            try {
-                const response = await fetch("http://localhost:8080/attendance/list", {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    mode: "cors"
-                });
-
+        fetch("http://localhost:8080/attendance/list", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            mode: "cors"
+        }).then(
+            response => {
                 if (!response.ok) {
                     console.log("Error: " + response.status);
                 }
 
-                const data: StudentData = await response.json();
+                return response.json()
+            }
+        ).then(
+            (data:StudentData) => {
                 setStudents(data.students)
                 setOriginStudents(data.students);
                 const names: string[] = data.students.map(s => s.name)
                 const codes: string[] = data.students.map(s => s.code)
                 setName(names)
                 setCode(codes)
-            } catch (err) {
-                console.log("Error: " + err);
             }
-        };
-
-        fetchStudent().then(r => console.log(r));
+        ).catch(
+            error => console.log("Error: " + error)
+        )
     }, [])
 
     useEffect(() => {
@@ -167,7 +167,7 @@ function AbsentReasonPage() {
                                     <td>{student.id}</td>
                                     <td>{student.code}</td>
                                     <td>{student.name}</td>
-                                    <td>{student.status}</td>
+                                    <td>{student.reason.length > 0 ? "Absent" : student.status}</td>
                                     <td>
                                         <input
                                             onChange={(event) => handleChange(event, student.id)}
