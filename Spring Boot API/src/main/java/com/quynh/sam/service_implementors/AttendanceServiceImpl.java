@@ -181,8 +181,7 @@ public class AttendanceServiceImpl implements AttendanceService {
                 .message("")
                 .students(
                         attendanceRepo.findAll().stream()
-                                .filter(attendance -> attendance.getDate().equals(LocalDate.now()))
-                                .filter(attendance -> !attendance.getStatus().equals(Status.PRESENT))
+                                .filter(attendance -> attendance.getDate().equals(LocalDate.now()) && attendance.getStatus().equals(Status.ABSENT_WITHOUT_REASON))
                                 .map(
                                         attendance -> ViewAllEditReasonResponse.Student.builder()
                                                 .id(attendance.getId())
