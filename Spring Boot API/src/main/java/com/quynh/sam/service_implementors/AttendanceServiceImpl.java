@@ -1,6 +1,7 @@
 package com.quynh.sam.service_implementors;
 
 
+import com.quynh.sam.enums.Admin;
 import com.quynh.sam.enums.Status;
 import com.quynh.sam.models.entity_models.Attendance;
 import com.quynh.sam.models.entity_models.Student;
@@ -11,6 +12,7 @@ import com.quynh.sam.models.response_models.SendEmailResponse;
 import com.quynh.sam.models.response_models.UpdateAttendanceStatusResponse;
 import com.quynh.sam.models.response_models.ViewAllEditReasonResponse;
 import com.quynh.sam.repositories.AttendanceRepo;
+import com.quynh.sam.repositories.StudentRepo;
 import com.quynh.sam.services.AttendanceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,25 +25,26 @@ import java.util.List;
 public class AttendanceServiceImpl implements AttendanceService {
 
     private final AttendanceRepo attendanceRepo;
+    private final StudentRepo studentRepo;
 
     @Override
     public UpdateAttendanceStatusResponse updateAttendanceStatus(UpdateAttendanceStatusRequest request) {
         List<Attendance> attendances = attendanceRepo.findAllByDate(LocalDate.now());// ds attendance hom nay
-        if(request.getStudentList().size() != attendances.size()) {
+        if (request.getStudentList().size() != attendances.size()) {
             return UpdateAttendanceStatusResponse.builder()
                     .status("400")
                     .message("Error")
                     .build();
         }
 
-        for(UpdateAttendanceStatusRequest.Student student : request.getStudentList()) {
+        for (UpdateAttendanceStatusRequest.Student student : request.getStudentList()) {
             Attendance attendance = getAttendanceByStudentID(student.getId());
             String status = checkStatus(student.getStatus());
-            if(status != null && !status.equals(Status.ABSENT)) {
+            if (status != null && !status.equals(Status.ABSENT)) {
                 assert attendance != null;
                 attendance.setReason("");
             }
-            if(status == null){
+            if (status == null) {
                 return UpdateAttendanceStatusResponse.builder()
                         .status("400")
                         .message("Error")
@@ -61,8 +64,8 @@ public class AttendanceServiceImpl implements AttendanceService {
 
     private Attendance getAttendanceByStudentID(int id) {
         List<Attendance> attendances = attendanceRepo.findAllByDate(LocalDate.now());
-        for(Attendance attendance : attendances) {
-            if(attendance.getStudent().getId() == id) {
+        for (Attendance attendance : attendances) {
+            if (attendance.getStudent().getId() == id) {
                 return attendance;
             }
         }
@@ -74,7 +77,7 @@ public class AttendanceServiceImpl implements AttendanceService {
         boolean isAbsent = status.equalsIgnoreCase(Status.ABSENT);
         boolean isAbsentWithoutReason = status.equalsIgnoreCase(Status.ABSENT_WITHOUT_REASON);
 
-        if(!isPresent && !isAbsent && !isAbsentWithoutReason){
+        if (!isPresent && !isAbsent && !isAbsentWithoutReason) {
             return null;
         }
         return isPresent ? Status.PRESENT : (isAbsent ? Status.ABSENT : Status.ABSENT_WITHOUT_REASON);
@@ -83,10 +86,10 @@ public class AttendanceServiceImpl implements AttendanceService {
     @Override
     public EditReasonResponse editReason(EditReasonRequest request) {
 
-        for(EditReasonRequest.Student student : request.getStudentList()) {
+        for (EditReasonRequest.Student student : request.getStudentList()) {
             Attendance attendance = attendanceRepo.findByDateAndStudent_Code(LocalDate.now(), student.getCode());
             assert attendance != null;
-            if(!student.getReason().isEmpty()){
+            if (!student.getReason().isEmpty()) {
                 attendance.setStatus(Status.ABSENT);
 
             } else {
@@ -181,7 +184,7 @@ public class AttendanceServiceImpl implements AttendanceService {
         return student.getAttendances().stream()
                 .filter(a -> a.getDate().equals(LocalDate.now()))
                 .map(
-                        a -> a.getStatus()
+                        Attendance::getStatus
                 )
                 .findAny()
                 .orElse(null);
